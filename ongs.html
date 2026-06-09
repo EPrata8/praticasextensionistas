@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorar ONGs - Conexão Cidadã</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+      /* Estilos sob medida para a visualização de grid e avaliação */
+      .ongs-page-container { max-width: 1160px; margin: 2rem auto; padding: 0 1.5rem; }
+      .rating-box { display: flex; align-items: center; gap: 4px; font-size: 0.85rem; color: #fbc02d; font-weight: bold; margin-top: 4px; }
+      .detalhes-expandidos { background: #f4f6f3; padding: 1rem; border-radius: 12px; margin-top: 0.75rem; font-size: 0.85rem; line-height: 1.5; color: var(--text); border-left: 4px solid var(--teal-mid); }
+      .btn-saiba-mais { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-bottom: 0.75rem; width: 100%; text-align: center; }
+      .btn-saiba-mais:hover { background: var(--green-light); color: var(--green-dark); border-color: var(--green-mid); }
+    </style>
+</head>
+<body>
+
+    <nav>
+      <a href="index.html" class="logo-container">
+        <img src="conexãocidadanobg.png" alt="Conexão Cidadã" class="logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-links btn-outline">Início</a>
+      </div>
+    </nav>
+
+    <div class="ongs-page-container">
+        <header class="header-ongs" style="text-align: center; margin: 2.5rem 0;">
+            <h1 style="font-family: 'Sora', sans-serif; color: var(--green-dark);">Escolha a ONG que deseja apoiar</h1>
+            <p style="color: var(--muted);">Compare as avaliações, veja os métodos de apoio e faça a sua parte.</p>
+        </header>
+
+        <div class="ong-grid">
+            
+            <div class="ong-card">
+                <div class="card-header">
+                    <div class="card-avatar av-green">🌿</div>
+                    <div>
+                        <div class="card-title">EcoVida</div>
+                        <div class="card-location">📍 Maricá, RJ</div>
+                        <div class="rating-box">⭐ 4.9 <span>(124 avaliações)</span></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-desc">Preservação ambiental, reflorestamento de áreas degradadas e educação ecológica nas escolas locais.</p>
+                    
+                    <button class="btn-saiba-mais" onclick="toggleDetalhes('detalhe-eco')">🔍 Saiba mais e formas de ajuda</button>
+                    
+                    <div id="detalhe-eco" class="detalhes-expandidos escondido">
+                      <strong>Como ajudar:</strong> Aceita voluntários para plantios aos sábados.<br>
+                      <strong>Doações via PIX:</strong> pix@ecovida.org
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="inscricao.html" class="btn-inscricao">Quero me inscrever</a>
+                </div>
+            </div>
+
+            <div class="ong-card">
+                <div class="card-header">
+                    <div class="card-avatar av-amber">🐾</div>
+                    <div>
+                        <div class="card-title">Patas Amigas</div>
+                        <div class="card-location">📍 Niterói, RJ</div>
+                        <div class="rating-box">⭐ 4.8 <span>(98 avaliações)</span></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-desc">Resgate, tratamento veterinário de urgência e feiras de adoção responsável para animais abandonados.</p>
+                    
+                    <button class="btn-saiba-mais" onclick="toggleDetalhes('detalhe-patas')">🔍 Saiba mais e formas de ajuda</button>
+                    
+                    <div id="detalhe-patas" class="detalhes-expandidos escondido">
+                      <strong>Como ajudar:</strong> Mutirões de banho e passeio aos domingos.<br>
+                      <strong>Doações via PIX:</strong> finanças@patasamigas.org
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="inscricao.html" class="btn-inscricao">Quero me inscrever</a>
+                </div>
+            </div>
+
+            <div class="ong-card">
+                <div class="card-header">
+                    <div class="card-avatar av-blue">📚</div>
+                    <div>
+                        <div class="card-title">EducaMais</div>
+                        <div class="card-location">📍 Rio de Janeiro, RJ</div>
+                        <div class="rating-box">⭐ 5.0 <span>(210 avaliações)</span></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-desc">Aulas de reforço escolar, alfabetização de adultos e introdução à tecnologia para comunidades.</p>
+                    
+                    <button class="btn-saiba-mais" onclick="toggleDetalhes('detalhe-educa')">🔍 Saiba mais e formas de ajuda</button>
+                    
+                    <div id="detalhe-educa" class="detalhes-expandidos escondido">
+                      <strong>Como ajudar:</strong> Professores voluntários (presencial ou online).<br>
+                      <strong>Doações via PIX:</strong> contato@educamais.org
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="inscricao.html" class="btn-inscricao">Quero me inscrever</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+      // Função simples para abrir/fechar as abas de Saiba Mais
+      function toggleDetalhes(idElemento) {
+        const detalhe = document.getElementById(idElemento);
+        if (detalhe.style.display === "block") {
+          detalhe.style.display = "none";
+        } else {
+          detalhe.style.display = "block";
+        }
+      }
+
+      // Trava de segurança para inscrição direta
+      document.querySelectorAll('.btn-inscricao').forEach(btn => {
+        btn.addEventListener('click', function(event) {
+          if (localStorage.getItem('conectado') !== 'sim') {
+            event.preventDefault(); 
+            alert('Você precisa fazer login para se candidatar às vagas da instituição.');
+            window.location.href = 'login.html';
+          }
+        });
+      });
+    </script>
+</body>
+</html>

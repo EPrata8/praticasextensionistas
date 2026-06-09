@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inscrição - ActionAid | Conexão Cidadã</title>
+  <title>Inscrição - Conexão Cidadã</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -11,78 +11,58 @@
 
   <nav>
    <a href="index.html" class="logo-container">
-    <img src="https://media.discordapp.net/attachments/785623564690259968/1493988202220879872/conexaocidadanobg.png?ex=69e0f870&is=69dfa6f0&hm=0b791dd927464cf101ebb1cff630a538ff5e6f431e7ca669d7d8e13f1de979b6&=&format=webp&quality=lossless" alt="Conexão Cidadã" class="logo-img">
+    <img src="conexãocidadanobg.png" alt="Conexão Cidadã" class="logo-img">
   </a>
     <div class="nav-links">
       <a href="index.html" class="nav-links btn-outline">Voltar ao Início</a>
     </div>
   </nav>
 
-  <div class="inscricao-container">
-    
-    <div class="ong-info">
-      <div class="ong-logo-large">AA</div>
-      <h1>ActionAid</h1>
+  <div class="inscricao-container" style="margin-top: 6rem; display: flex; justify-content: center; width: 100%;">
+    <div class="ong-form" style="width: 100%; max-width: 500px;">
+      <h2>Confirmar sua Inscrição</h2>
+      <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Defina sua disponibilidade e finalize para enviar seus dados organizacionais.</p>
       
-      <div class="ong-description-box">
-        Combate à pobreza e às desigualdades, com foco em justiça social e de gênero.
-      </div>
-      
-      <p style="margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--muted);">Localização:</p>
-      <a href="#" class="ong-location">
-        Saiba mais 📍
-      </a>
-    </div>
-
-    <div class="ong-form">
-      <h2>Dados necessários para Inscrição:</h2>
-      
-      <form id="form-inscricao">
+      <form id="form-finalizar-inscricao">
         <div class="input-group">
-          <input type="text" placeholder="Digite o seu nome:" required>
-        </div>
-        <div class="input-group">
-          <input type="tel" placeholder="Digite o seu telefone:" required>
-        </div>
-        <div class="input-group">
-          <input type="email" placeholder="Digite o seu email:" required>
+          <label for="vol-nome-readonly">Nome do Voluntário</label>
+          <input type="text" id="vol-nome-readonly" readonly style="background: #f0f0f0; cursor: not-allowed;">
         </div>
 
-        <h3 class="section-title" style="color: var(--teal-mid); font-weight: 600; margin: 1.5rem 0 1rem;">Tipos de ajuda:</h3>
+        <h3 class="section-title" style="color: var(--teal-mid); font-weight: 600; margin: 1.5rem 0 1rem; font-size: 1.1rem;">Disponibilidade Presencial:</h3>
         
-        <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 0.5rem;">Presencial:</p>
         <div class="checkbox-group">
           <label class="checkbox-item">
-            <input type="checkbox" name="horario1">
-            Segunda (10:00 até 19:00)
+            <input type="checkbox" name="horario1"> Segunda (10:00 até 19:00)
           </label>
           <label class="checkbox-item">
-            <input type="checkbox" name="horario2">
-            Quarta (12:00 até 22:30)
+            <input type="checkbox" name="horario2"> Quarta (12:00 até 22:30)
           </label>
         </div>
 
-        <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 0.5rem;">Doações:</p>
-        <button type="button" class="btn-pix" onclick="alert('Chave PIX copiada!')">
-          Copiar chave-pix ⧉
+        <h3 class="section-title" style="color: var(--teal-mid); font-weight: 600; margin: 1.5rem 0 1rem; font-size: 1.1rem;">Apoio Financeiro Alternativo:</h3>
+        <button type="button" class="btn-pix" style="width: 100%; margin-bottom: 1.5rem;" onclick="alert('Chave PIX copiada com sucesso!')">
+          Copiar chave-pix da ONG ⧉
         </button>
 
-        <button type="submit" class="btn-finalizar">Finalizar</button>
+        <button type="submit" class="btn-finalizar" style="width: 100%; padding: 12px; background: var(--green-dark); color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Finalizar Inscrição</button>
       </form>
     </div>
-
   </div>
 
   <script>
-    // Se o usuário acessar a página e não estiver logado, redireciona para o login
+    // Trava de Segurança de Login
     if (localStorage.getItem('conectado') !== 'sim') {
+      alert('Acesso negado. Faça login para acessar esta página.');
       window.location.href = 'login.html';
+    } else {
+      document.getElementById('vol-nome-readonly').value = localStorage.getItem('nomeUsuario');
     }
 
-    // Ao enviar a inscrição, exibe sucesso e volta ao início
-    document.getElementById('form-inscricao').addEventListener('submit', function(event) {
-      event.preventDefault();
-      alert('Inscrição confirmada com sucesso! A ONG entrará em contato em breve.');
+    // Ação do formulário
+    document.getElementById('form-finalizar-inscricao').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Sua candidatura foi enviada com sucesso para a ONG selecionada!');
       window.location.href = 'index.html';
     });
   </script>

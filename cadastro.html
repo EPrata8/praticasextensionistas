@@ -6,51 +6,92 @@
   <title>Cadastro - Conexão Cidadã</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .selection-group { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+    .btn-select-type {
+      width: 100%; background: #fff; border: 2px solid var(--border); padding: 1.25rem;
+      border-radius: 12px; font-weight: 600; font-size: 1.05rem; color: var(--green-dark);
+      cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .btn-select-type:hover { border-color: var(--green-mid); background: var(--green-light); transform: translateY(-2px); }
+    .escondido { display: none !important; }
+    .btn-back { background: transparent; border: none; color: var(--teal-mid); font-weight: 600; font-size: 0.9rem; cursor: pointer; margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 0.25rem; }
+  </style>
 </head>
 <body>
 
   <nav>
     <a href="index.html" class="logo-container">
-        <img src="https://media.discordapp.net/attachments/785623564690259968/1493988202220879872/conexaocidadanobg.png?ex=69e0f870&is=69dfa6f0&hm=0b791dd927464cf101ebb1cff630a538ff5e6f431e7ca669d7d8e13f1de979b6&=&format=webp&quality=lossless" alt="Conexão Cidadã" class="logo-img">
+        <img src="conexãocidadanobg.png" alt="Conexão Cidadã" class="logo-img">
     </a>
     <div class="nav-links">
         <a href="login.html" class="nav-links btn-outline">Já tenho conta</a>
     </div>
   </nav>
 
-  <div class="register-container">
+  <div class="register-container" style="margin-top: 6rem;">
     <div class="register-card">
-      <div class="register-header">
-        <h2>Criar conta</h2>
-        <p>Junte-se a nós e comece a impactar o mundo.</p>
-      </div>
       
-      <form id="form-cadastro">
-        <div class="input-group">
-          <label for="nome">Nome Completo</label>
-          <input type="text" id="nome" placeholder="Como quer ser chamado?" required>
+      <div id="passo-selecao">
+        <div class="register-header">
+          <h2>Criar conta</h2>
+          <p>Como você deseja se conectar ao Conexão Cidadã?</p>
         </div>
+        <div class="selection-group">
+          <button class="btn-select-type" onclick="mudarPasso('voluntario')">🖐️ Quero ser um Voluntário</button>
+          <button class="btn-select-type" onclick="mudarPasso('ong')">🏢 Quero cadastrar minha ONG</button>
+        </div>
+      </div>
 
-        <div class="input-group">
-          <label for="tipo">Eu sou...</label>
-          <select id="tipo">
-            <option value="voluntario">Um Voluntário</option>
-            <option value="ong">Uma ONG</option>
-          </select>
+      <div id="passo-voluntario" class="escondido">
+        <button class="btn-back" onclick="voltarEscolha()">← Mudar tipo de conta</button>
+        <div class="register-header">
+          <h2>Cadastro de Voluntário</h2>
+          <p>Encontre causas incríveis e transforme vidas.</p>
         </div>
+        <form id="form-cadastro-voluntario">
+          <div class="input-group">
+            <label for="vol-nome">Nome Completo</label>
+            <input type="text" id="vol-nome" placeholder="Como quer ser chamado?" required>
+          </div>
+          <div class="input-group">
+            <label for="vol-email">E-mail</label>
+            <input type="email" id="vol-email" placeholder="seu@email.com" required>
+          </div>
+          <div class="input-group">
+            <label for="vol-password">Criar Senha</label>
+            <input type="password" id="vol-password" placeholder="Mínimo 8 caracteres" required>
+          </div>
+          <button type="submit" class="btn-register">Finalizar Cadastro</button>
+        </form>
+      </div>
 
-        <div class="input-group">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" placeholder="seu@email.com" required>
+      <div id="passo-ong" class="escondido">
+        <button class="btn-back" onclick="voltarEscolha()">← Mudar tipo de conta</button>
+        <div class="register-header">
+          <h2>Cadastro de Organização</h2>
+          <p>Divulgue seus projetos e encontre apoiadores.</p>
         </div>
-        
-        <div class="input-group">
-          <label for="password">Criar Senha</label>
-          <input type="password" id="password" placeholder="Mínimo 8 caracteres" required>
-        </div>
-        
-        <button type="submit" class="btn-register">Finalizar Cadastro</button>
-      </form>
+        <form id="form-cadastro-ong">
+          <div class="input-group">
+            <label for="ong-nome">Nome da Organização</label>
+            <input type="text" id="ong-nome" placeholder="Nome da instituição" required>
+          </div>
+          <div class="input-group">
+            <label for="ong-cnpj">CNPJ</label>
+            <input type="text" id="ong-cnpj" placeholder="00.000.000/0001-00" required>
+          </div>
+          <div class="input-group">
+            <label for="ong-email">E-mail Institucional</label>
+            <input type="email" id="ong-email" placeholder="contato@ong.org" required>
+          </div>
+          <div class="input-group">
+            <label for="ong-password">Criar Senha</label>
+            <input type="password" id="ong-password" placeholder="Mínimo 8 caracteres" required>
+          </div>
+          <button type="submit" class="btn-register">Cadastrar Organização</button>
+        </form>
+      </div>
       
       <div class="register-footer">
         Já possui uma conta? <a href="login.html">Fazer Login</a>
@@ -59,21 +100,44 @@
   </div>
 
   <script>
-    document.getElementById('form-cadastro').addEventListener('submit', function(event) {
-      event.preventDefault(); 
+    const passoSelecao = document.getElementById('passo-selecao');
+    const passoVoluntario = document.getElementById('passo-voluntario');
+    const passoOng = document.getElementById('passo-ong');
 
-      // Pega os dados digitados
-      const nome = document.getElementById('nome').value;
-      const email = document.getElementById('email').value;
-      const senha = document.getElementById('password').value;
-      
-      // Salva no LocalStorage
-      localStorage.setItem('nomeUsuario', nome);
-      localStorage.setItem('emailUsuario', email);
-      localStorage.setItem('senhaUsuario', senha);
+    function mudarPasso(tipo) {
+      passoSelecao.classList.add('escondido');
+      if (tipo === 'voluntario') {
+        passoVoluntario.classList.remove('escondido');
+      } else {
+        passoOng.classList.remove('escondido');
+      }
+    }
+
+    function voltarEscolha() {
+      passoVoluntario.classList.add('escondido');
+      passoOng.classList.add('escondido');
+      passoSelecao.classList.remove('escondido');
+    }
+
+    // Submit Voluntário
+    document.getElementById('form-cadastro-voluntario').addEventListener('submit', function(e) {
+      e.preventDefault();
+      localStorage.setItem('nomeUsuario', document.getElementById('vol-nome').value);
+      localStorage.setItem('emailUsuario', document.getElementById('vol-email').value);
+      localStorage.setItem('senhaUsuario', document.getElementById('vol-password').value);
+      localStorage.setItem('tipoUsuario', 'voluntario');
       localStorage.setItem('conectado', 'sim');
-      
-      alert('Cadastro realizado com sucesso! Bem-vindo(a) ao Conexão Cidadã.');
+      window.location.href = 'index.html';
+    });
+
+    // Submit ONG
+    document.getElementById('form-cadastro-ong').addEventListener('submit', function(e) {
+      e.preventDefault();
+      localStorage.setItem('nomeUsuario', document.getElementById('ong-nome').value);
+      localStorage.setItem('emailUsuario', document.getElementById('ong-email').value);
+      localStorage.setItem('senhaUsuario', document.getElementById('ong-password').value);
+      localStorage.setItem('tipoUsuario', 'ong');
+      localStorage.setItem('conectado', 'sim');
       window.location.href = 'index.html';
     });
   </script>
